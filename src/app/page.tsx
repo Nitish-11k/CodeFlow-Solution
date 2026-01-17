@@ -5,10 +5,13 @@ import Kits from "../components/Kits";
 import Hosting from "../components/Hosting";
 import TechStack from "../components/TechStack";
 import Contact from "../components/Contact";
+import WaitlistPopup from "../components/WaitlistPopup"; // <--- Import this
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <WaitlistPopup /> {/* <--- Add this here */}
+      
       <Navbar />
       <Hero />
       <Mission />

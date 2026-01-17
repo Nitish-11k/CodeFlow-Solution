@@ -1,11 +1,17 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link"; // Import Link for page navigation
 
 export default function Navbar() {
   const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    // Check if we are on the homepage before scrolling
+    if (window.location.pathname !== '/') {
+        window.location.href = '/#' + id;
+    } else {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
     }
   };
 
@@ -14,12 +20,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo Section */}
-        <div className="flex items-center cursor-pointer" onClick={() => scrollTo('hero')}>
-          {/* CHANGES MADE:
-             1. w-64 (increased from w-48) -> Image width bada kiya
-             2. h-16 (increased from h-12) -> Image height badi ki
-             3. -ml-4 -> Negative margin se image ko thoda left shift kiya
-          */}
+        <Link href="/" className="flex items-center cursor-pointer">
           <div className="relative w-64 h-16 -ml-4">
             <Image 
               src="/Codeflow.png" 
@@ -29,10 +30,16 @@ export default function Navbar() {
               priority
             />
           </div>
-        </div>
+        </Link>
         
         {/* Navigation */}
         <div className="hidden lg:flex gap-8 text-sm font-semibold text-[#64748B]">
+          {/* New About Us Page Link */}
+          <Link href="/about" className="hover:text-[#1B365D] transition-colors">
+            About Us
+          </Link>
+
+          {/* Existing Scroll Links */}
           <button onClick={() => scrollTo('mission')} className="hover:text-[#1B365D] transition-colors">Our Aim</button>
           <button onClick={() => scrollTo('kits')} className="hover:text-[#1B365D] transition-colors">Founder Kits</button>
           <button onClick={() => scrollTo('stack')} className="hover:text-[#1B365D] transition-colors">Tech Stack</button>
