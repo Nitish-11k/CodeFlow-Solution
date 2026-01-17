@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Royal Soft Palette */
+  --background: #FDFCF8;       /* Premium Cream White (Soft) */
+  --foreground: #1E293B;       /* Slate Charcoal (Softer than black) */
+  
+  /* The Royal Colors */
+  --primary: #1B365D;          /* Royal Navy Blue (Trust/Authority) */
+  --accent: #D4AF37;           /* Soft Champagne Gold (Premium) */
+  --secondary: #F1F5F9;        /* Soft Blue-Grey (Section backgrounds) */
+  --border: #E2E8F0;           
+}
+
+html {
+  scroll-behavior: smooth; /* Enables the smooth scroll effect */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  antialiased: true;
+}
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
 }
