@@ -8,34 +8,34 @@ import { useState, useEffect } from "react";
 import WaitlistPopup from "@/components/WaitlistPopup";
 
 export default function KitDetailPage() {
-  const params = useParams();
+  // --- FIX: Explicitly tell TypeScript that params contains a 'slug' string ---
+  const params = useParams<{ slug: string }>();
   
-  // --- FIX: TYPE SAFETY FOR SLUG ---
-  // TypeScript fears 'slug' might be an array or undefined. We force it to be a string.
   const [slug, setSlug] = useState<string>("");
 
   useEffect(() => {
+    // Now TypeScript knows params.slug exists and is a string
     if (params?.slug) {
-      const s = Array.isArray(params.slug) ? params.slug[0] : params.slug;
-      setSlug(s);
+      setSlug(params.slug);
     }
   }, [params]);
 
   const kit = kitsData.find((k) => k.slug === slug);
-  // ---------------------------------
-
   const [showWaitlist, setShowWaitlist] = useState(false);
 
-  // Show loading while slug is being determined
+  // 1. Loading State (While reading URL)
   if (!slug) {
      return <div className="min-h-screen bg-[#FDFCF8]" />; 
   }
 
+  // 2. Not Found State (If slug is wrong)
   if (!kit) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFCF8]">
-        <h1 className="text-2xl text-[#1B365D]">Kit Not Found</h1>
-        <Link href="/" className="ml-4 text-blue-500 underline">Go Home</Link>
+        <div className="text-center">
+            <h1 className="text-2xl font-bold text-[#1B365D] mb-4">Kit Not Found</h1>
+            <Link href="/" className="text-[#D4AF37] hover:underline">Return Home</Link>
+        </div>
       </div>
     );
   }
@@ -47,7 +47,7 @@ export default function KitDetailPage() {
       {showWaitlist && (
         <div className="fixed inset-0 z-[9999]">
            <WaitlistPopup />
-           {/* Invisible overlay to close on click outside if needed */}
+           {/* Invisible overlay to close on click outside */}
            <div className="hidden" onClick={() => setShowWaitlist(false)}></div>
         </div>
       )}
@@ -64,7 +64,7 @@ export default function KitDetailPage() {
           {/* --- LEFT: DETAILS --- */}
           <div className="lg:col-span-2 space-y-12">
             
-            {/* 1. Main Info */}
+            {/* Main Info */}
             <div className="space-y-6">
               <div>
                 <span className="inline-block px-3 py-1 bg-[#F1F5F9] text-[#1B365D] text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-[#E2E8F0]">
@@ -110,10 +110,8 @@ export default function KitDetailPage() {
               </div>
             </div>
 
-            {/* 2. DOCUMENTATION SECTION (Locked State) */}
+            {/* DOCUMENTATION SECTION (Locked) */}
             <div className="border border-[#E2E8F0] bg-white rounded-3xl overflow-hidden relative">
-               
-               {/* Header */}
                <div className="bg-gray-50 border-b border-[#E2E8F0] p-6 flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#1B365D] flex items-center gap-2">
                     <FileText size={20} /> Setup Documentation
@@ -126,8 +124,6 @@ export default function KitDetailPage() {
                </div>
 
                <div className="relative p-8 min-h-[300px]">
-                  
-                  {/* --- BLURRED BACKGROUND CONTENT --- */}
                   <div className="opacity-30 blur-[2px] select-none pointer-events-none space-y-6">
                     <div>
                       <h4 className="text-xl font-bold text-[#1B365D] mb-2">1. Prerequisites</h4>
@@ -153,7 +149,6 @@ export default function KitDetailPage() {
                     </div>
                   </div>
 
-                  {/* --- LOCKED OVERLAY --- */}
                   <div className="absolute inset-0 z-10 bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6">
                      <div className="w-16 h-16 bg-white border-2 border-[#E2E8F0] rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                         <Lock size={32} className="text-[#D4AF37]" />
@@ -169,13 +164,11 @@ export default function KitDetailPage() {
 
                </div>
             </div>
-
           </div>
 
-          {/* --- RIGHT: PRICING CARD (Sticky) --- */}
+          {/* --- RIGHT: PRICING CARD --- */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-white p-8 rounded-3xl border border-[#D4AF37]/30 shadow-2xl shadow-[#1B365D]/10">
-              
               <div className="text-center mb-6">
                 <p className="text-[#64748B] text-sm font-medium mb-1">One-time Payment</p>
                 <div className="flex items-center justify-center gap-1">
@@ -196,7 +189,6 @@ export default function KitDetailPage() {
                   <span>Join Waitlist to Buy</span>
                   <Rocket size={18} className="text-[#D4AF37] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
-                
                 <p className="text-center text-xs text-[#94A3B8] leading-snug">
                   * By joining the waitlist, you get early access and a special discount when we launch.
                 </p>
@@ -212,7 +204,6 @@ export default function KitDetailPage() {
                   <span className="font-bold text-[#1B365D]">Email & Docs</span>
                 </div>
               </div>
-
             </div>
           </div>
 
