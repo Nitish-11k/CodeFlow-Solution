@@ -9,7 +9,7 @@ export default function Mission() {
           <Target className="w-6 h-6 text-[#1B365D]" />
         </div>
         
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#D4AF37]">Our Mission</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#D4AF37]">Our Aim</h2>
         
         <p className="text-xl md:text-2xl leading-relaxed font-light text-gray-100">
           "We aim to provide the better solution to every new startup founder who struggles to create their first MVP. 

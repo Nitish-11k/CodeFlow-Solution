@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, Linkedin } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -26,11 +26,24 @@ export default function Hero() {
             Premium Microservices & Hosting designed to save you months of development time.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => document.getElementById('kits')?.scrollIntoView({behavior:'smooth'})} className="flex items-center justify-center gap-2 bg-[#1B365D] hover:bg-[#2C4A7C] text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-[#1B365D]/20">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Primary CTA */}
+            <button onClick={() => document.getElementById('kits')?.scrollIntoView({behavior:'smooth'})} className="flex items-center justify-center gap-2 bg-[#1B365D] hover:bg-[#2C4A7C] text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-[#1B365D]/20 hover:-translate-y-1">
               View Solutions <ArrowRight className="w-5 h-5" />
             </button>
+
+            {/* LinkedIn Logo Link */}
+            <a 
+              href="https://www.linkedin.com/company/codeflow-solution/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="p-4 rounded-full bg-white border border-[#E2E8F0] text-[#0077B5] hover:bg-[#0077B5] hover:text-white transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
+              aria-label="Visit our LinkedIn"
+            >
+              <Linkedin size={24} strokeWidth={1.5} />
+            </a>
           </div>
+
         </motion.div>
       </div>
     </section>

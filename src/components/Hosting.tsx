@@ -59,7 +59,6 @@ export default function Hosting() {
           width: 100%;
           height: 100%;
         }
-
         .card {
           position: absolute;
           top: 0;
@@ -72,20 +71,17 @@ export default function Hosting() {
           border-radius: 24px;
           padding: 24px;
           box-shadow: 0 0 40px rgba(0,0,0,0.5);
-          /* Default State (Back of stack) */
           transform: translateY(0) rotate(4deg) translateX(25px) scale(1);
           transform-origin: 0 0;
           transition: transform 0.6s cubic-bezier(.8,.2,.1,0.8) 0.1s, background 0.4s linear;
           cursor: pointer;
           user-select: none;
         }
-
         .card--next {
           z-index: 5;
           transform: translateY(-25px) rotate(4deg) translateX(25px) scale(1);
           background: #1E293B;
         }
-
         .card--out {
           animation: card-out 0.6s cubic-bezier(.8,.2,.1,0.8);
           transform: translateY(-50px) rotate(8deg) translateX(55px) scale(0.95);
@@ -94,7 +90,6 @@ export default function Hosting() {
           opacity: 0.5;
           pointer-events: none;
         }
-
         .card--current {
           cursor: default;
           z-index: 10;
@@ -104,7 +99,6 @@ export default function Hosting() {
           transform: rotate(-1deg) translateX(0%) scale(1);
           box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-
         @keyframes card-out {
           0% { z-index: 20; transform: translateY(0px) rotate(-4deg); }
           50% { transform: translateY(-120%) rotate(-5deg) translateX(-40px); }
@@ -113,71 +107,11 @@ export default function Hosting() {
         }
       `}} />
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
+      {/* Added gap-16 to create space between text and cards on mobile */}
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center relative z-10 w-full">
         
-        {/* LEFT SIDE: The Animation Cards (Now Order 1) */}
-        <div className="relative h-[500px] w-full max-w-[400px] mx-auto order-1">
-          
-          <ul className="cards">
-            {plans.map((plan, index) => {
-              let className = "card";
-              if (index === activeIndex) className += " card--current";
-              else if (index === nextIndex) className += " card--next";
-              else if (index === outIndex) className += " card--out";
-
-              return (
-                <li key={index} className={className} onClick={() => handleCardClick(index)}>
-                  {/* Card Content */}
-                  <div className="h-full flex flex-col justify-between pointer-events-none">
-                    
-                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
-                       <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${plan.color} animate-pulse`} />
-                          <span className="text-xs font-mono text-[#D4AF37] uppercase tracking-wider">{plan.tag}</span>
-                       </div>
-                       <Server className="text-white/20" size={20} />
-                    </div>
-
-                    <div className="text-center py-4">
-                      <h3 className="text-2xl font-bold text-white mb-6">{plan.name}</h3>
-                      
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
-                           <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Cpu size={14}/> CPU</span>
-                           <span className="text-white font-mono">{plan.cpu}</span>
-                        </div>
-                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
-                           <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Shield size={14}/> RAM</span>
-                           <span className="text-white font-mono">{plan.ram}</span>
-                        </div>
-                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
-                           <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Zap size={14}/> SSD</span>
-                           <span className="text-white font-mono">{plan.storage}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/10">
-                      <div className="w-full py-2 bg-[#D4AF37] text-[#1B365D] font-bold text-sm uppercase rounded hover:bg-white transition-colors text-center">
-                        Deploy Server
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Helper Instruction */}
-          <div className="mt-8 text-center animate-pulse">
-            <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2">
-              <MousePointerClick className="w-4 h-4" /> Click Stack to Cycle Plans
-            </p>
-          </div>
-        </div>
-
-        {/* RIGHT SIDE: Text Section (Now Order 2) */}
-        <div className="text-center lg:text-left order-2">
+        {/* RIGHT SIDE (TEXT): Order 1 on Mobile, Order 2 on Desktop */}
+        <div className="text-center lg:text-left order-1 lg:order-2">
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-[#94A3B8] mb-6">
             PREMIUM <br />
             <span className="text-[#D4AF37]">VPS CLOUD</span>
@@ -200,6 +134,66 @@ export default function Hosting() {
               <CheckCircle2 className="text-[#D4AF37]" size={20} />
               <span>10Gbps Uplink</span>
             </div>
+          </div>
+        </div>
+
+        {/* LEFT SIDE (CARDS): Order 2 on Mobile, Order 1 on Desktop */}
+        <div className="relative h-[450px] w-full max-w-[400px] mx-auto order-2 lg:order-1">
+          
+          <ul className="cards">
+            {plans.map((plan, index) => {
+              let className = "card";
+              if (index === activeIndex) className += " card--current";
+              else if (index === nextIndex) className += " card--next";
+              else if (index === outIndex) className += " card--out";
+
+              return (
+                <li key={index} className={className} onClick={() => handleCardClick(index)}>
+                  {/* Card Content */}
+                  <div className="h-full flex flex-col justify-between pointer-events-none">
+                    
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${plan.color} animate-pulse`} />
+                          <span className="text-xs font-mono text-[#D4AF37] uppercase tracking-wider">{plan.tag}</span>
+                        </div>
+                        <Server className="text-white/20" size={20} />
+                    </div>
+
+                    <div className="text-center py-4">
+                      <h3 className="text-2xl font-bold text-white mb-6">{plan.name}</h3>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
+                            <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Cpu size={14}/> CPU</span>
+                            <span className="text-white font-mono">{plan.cpu}</span>
+                        </div>
+                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
+                            <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Shield size={14}/> RAM</span>
+                            <span className="text-white font-mono">{plan.ram}</span>
+                        </div>
+                        <div className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5">
+                            <span className="text-[#94A3B8] text-sm flex items-center gap-2"><Zap size={14}/> SSD</span>
+                            <span className="text-white font-mono">{plan.storage}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/10">
+                      <div className="w-full py-2 bg-[#D4AF37] text-[#1B365D] font-bold text-sm uppercase rounded hover:bg-white transition-colors text-center">
+                        Deploy Server
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-8 text-center animate-pulse">
+            <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2">
+              <MousePointerClick className="w-4 h-4" /> Click Stack to Cycle Plans
+            </p>
           </div>
         </div>
 
