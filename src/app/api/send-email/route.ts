@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// ✅ FIX: Interface banaya taaki TypeScript khush rahe
+interface EmailRequestBody {
+  email: string;
+  name: string;
+  message: string;
+  type: string;
+}
+
 export async function POST(req: Request) {
   try {
-    const { email, name, message, type } = await req.json();
+    // ✅ FIX: "as EmailRequestBody" lagaya
+    const { email, name, message, type } = await req.json() as EmailRequestBody;
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -19,10 +28,7 @@ export async function POST(req: Request) {
     });
 
     // --- CONFIGURATION ---
-    // Yahan apni PNG image ka ONLINE link daalna (Localhost wala link email me nahi chalega)
-    // Example: "https://i.imgur.com/YourImageID.png" or "https://your-domain.com/Codeflow.png"
     const logoUrl = "https://iili.io/fUpIYTx.jpg"; 
-    
     const linkedinUrl = "https://www.linkedin.com/company/codeflow-solution/";
     const linkedinIcon = "https://cdn-icons-png.flaticon.com/512/174/174857.png";
 
