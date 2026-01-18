@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+// ✅ FIX 1: 'Variants' type ko import kiya
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -31,8 +32,9 @@ export default function Navbar() {
     }
   };
 
-  // Animation variants for menu items
-  const menuVariants = {
+  // ✅ FIX 2: Explicitly Type define kiya 'Variants'
+  // Ab TypeScript samjhega ki "easeOut" ek valid easing property hai
+  const menuVariants: Variants = {
     closed: { opacity: 0, x: -20 },
     open: (i: number) => ({
       opacity: 1,
@@ -54,11 +56,6 @@ export default function Navbar() {
           : "bg-[#FDFCF8]/80 border-[#E2E8F0]/50 backdrop-blur-xl" 
         }`}
       >
-        {/* CHANGE: 
-            Removed 'max-w-7xl mx-auto' (which centered it).
-            Added 'w-full' so it spans the full screen width.
-            Added 'px-6 lg:px-10' for edge padding.
-        */}
         <div className="w-full px-6 lg:px-10 h-20 flex items-center justify-between">
           
           {/* --- Logo Section (Extreme Left) --- */}
