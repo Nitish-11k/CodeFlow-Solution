@@ -158,7 +158,7 @@ export default function WaitlistPopup() {
                     </button>
                   </form>
 
-                  <div className="mt-6 pt-4 border-t border-gray-100 text-center flex flex-col gap-3">
+                  <div className="mt-1 pt-4 border-t border-gray-100 text-center flex flex-col gap-3">
                      <p className="text-xs text-gray-400">Stay updated with our journey</p>
                      <a 
                        href="https://www.linkedin.com/company/codeflow-solution/" 

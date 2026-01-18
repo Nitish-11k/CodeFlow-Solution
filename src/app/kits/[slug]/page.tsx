@@ -4,19 +4,38 @@ import { kitsData } from "@/lib/kitsData";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Shield, Zap, Rocket, FileText, Lock, Terminal } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WaitlistPopup from "@/components/WaitlistPopup";
 
 export default function KitDetailPage() {
   const params = useParams();
-  const slug = params.slug;
+  
+  // --- FIX: TYPE SAFETY FOR SLUG ---
+  // TypeScript fears 'slug' might be an array or undefined. We force it to be a string.
+  const [slug, setSlug] = useState<string>("");
+
+  useEffect(() => {
+    if (params?.slug) {
+      const s = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+      setSlug(s);
+    }
+  }, [params]);
+
   const kit = kitsData.find((k) => k.slug === slug);
+  // ---------------------------------
+
   const [showWaitlist, setShowWaitlist] = useState(false);
+
+  // Show loading while slug is being determined
+  if (!slug) {
+     return <div className="min-h-screen bg-[#FDFCF8]" />; 
+  }
 
   if (!kit) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFCF8]">
         <h1 className="text-2xl text-[#1B365D]">Kit Not Found</h1>
+        <Link href="/" className="ml-4 text-blue-500 underline">Go Home</Link>
       </div>
     );
   }
@@ -28,6 +47,7 @@ export default function KitDetailPage() {
       {showWaitlist && (
         <div className="fixed inset-0 z-[9999]">
            <WaitlistPopup />
+           {/* Invisible overlay to close on click outside if needed */}
            <div className="hidden" onClick={() => setShowWaitlist(false)}></div>
         </div>
       )}
@@ -107,7 +127,7 @@ export default function KitDetailPage() {
 
                <div className="relative p-8 min-h-[300px]">
                   
-                  {/* --- BLURRED BACKGROUND CONTENT (Fake Docs) --- */}
+                  {/* --- BLURRED BACKGROUND CONTENT --- */}
                   <div className="opacity-30 blur-[2px] select-none pointer-events-none space-y-6">
                     <div>
                       <h4 className="text-xl font-bold text-[#1B365D] mb-2">1. Prerequisites</h4>
