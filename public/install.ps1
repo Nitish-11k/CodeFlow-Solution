@@ -1,54 +1,79 @@
-#!/bin/bash
+param([string]$Key)
 
-# Colors
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-RED='\033[0;31m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Clear screen for a clean look
+Clear-Host
 
-echo -e "${CYAN}🚀 Initializing FounderKit Setup...${NC}"
+Write-Host "=============================================" -ForegroundColor Cyan
+Write-Host "   🚀  FOUNDER KIT INSTALLER (WINDOWS)      " -ForegroundColor Cyan
+Write-Host "=============================================" -ForegroundColor Cyan
+Write-Host ""
 
-# 1. Ask for Key
-echo -n "🔑 Enter your License Key: "
-read KEY
+# 1. Ask for License Key if not provided via command line
+if ([string]::IsNullOrEmpty($Key)) {
+    $Key = Read-Host "🔑 Enter your License Key"
+}
 
-if [ -z "$KEY" ]; then
-  echo -e "${RED}❌ License Key is required.${NC}"
-  exit 1
-fi
+if ([string]::IsNullOrEmpty($Key)) {
+    Write-Host "❌ Error: License Key cannot be empty." -ForegroundColor Red
+    exit
+}
 
 # 2. Verify Key via API
-VERIFY_URL="https://code-flow-solution.vercel.app/api/verify-license?key=$KEY"
-HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$VERIFY_URL")
+Write-Host "🔍 Verifying License Key..." -ForegroundColor Yellow
+$VerifyUrl = "https://code-flow-solution.vercel.app/api/verify-license?key=$Key"
 
-if [ "$HTTP_STATUS" != "200" ]; then
-  echo -e "${RED}❌ Invalid License Key or Server Error.${NC}"
-  exit 1
-fi
+try {
+    $Response = Invoke-RestMethod -Uri $VerifyUrl -Method Get -ErrorAction Stop
+}
+catch {
+    Write-Host "❌ Error: Could not connect to verification server." -ForegroundColor Red
+    Write-Host "   Please check your internet connection." -ForegroundColor Gray
+    exit
+}
 
-# 3. Download
-ZIP_URL="https://code-flow-solution.vercel.app/asset_x99_v2.bin"
-OUTPUT_ZIP="FounderKit.zip"
+if ($Response.status -ne "Active") {
+    Write-Host "❌ Error: Invalid License Key." -ForegroundColor Red
+    Write-Host "   Please contact support if you think this is a mistake." -ForegroundColor Gray
+    exit
+}
 
-echo -e "${YELLOW}⬇️  Downloading FounderKit Core...${NC}"
-curl -L -o "$OUTPUT_ZIP" "$ZIP_URL"
+Write-Host "✅ License Verified!" -ForegroundColor Green
+
+# 3. Download the Hidden Kit
+$ZipUrl = "https://code-flow-solution.vercel.app/asset_x99_v2.bin"
+$OutputZip = "FounderKit.zip"
+
+Write-Host "⬇️  Downloading FounderKit Core..." -ForegroundColor Yellow
+
+try {
+    Invoke-WebRequest -Uri $ZipUrl -OutFile $OutputZip -ErrorAction Stop
+}
+catch {
+    Write-Host "❌ Error: Download failed." -ForegroundColor Red
+    exit
+}
 
 # 4. Unzip
-echo -e "${YELLOW}📦 Extracting Files...${NC}"
-# Check if unzip is installed
-if ! command -v unzip &> /dev/null; then
-    echo "unzip command not found, installing..."
-    sudo apt-get install unzip -y
-fi
+Write-Host "📦 Extracting Files..." -ForegroundColor Yellow
 
-# Unzip to current directory (assuming zip contains the folder)
-unzip -q "$OUTPUT_ZIP"
-rm "$OUTPUT_ZIP"
+if (Test-Path "FounderKit") {
+    Write-Host "⚠️  'FounderKit' folder already exists. Overwriting..." -ForegroundColor DarkYellow
+}
 
-# 5. Create Key File
-echo "$KEY" > FounderKit/founder.key
+Expand-Archive -Path $OutputZip -DestinationPath "FounderKit" -Force
+Remove-Item $OutputZip
 
-echo -e "${GREEN}✅ Setup Complete!${NC}"
-echo -e "   cd FounderKit"
-echo -e "   dotnet run --project FounderKit.API"
+# 5. Create the Secret License File
+$KeyPath = Join-Path "FounderKit" "founder.key"
+Set-Content -Path $KeyPath -Value $Key
+
+Write-Host ""
+Write-Host "=============================================" -ForegroundColor Green
+Write-Host "   ✅  SETUP COMPLETE! READY TO LAUNCH.     " -ForegroundColor Green
+Write-Host "=============================================" -ForegroundColor Green
+Write-Host ""
+Write-Host "To start the backend, run these commands:" -ForegroundColor White
+Write-Host ""
+Write-Host "   cd FounderKit" -ForegroundColor Cyan
+Write-Host "   dotnet run --project FounderKit.API" -ForegroundColor Cyan
+Write-Host ""
