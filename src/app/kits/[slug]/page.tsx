@@ -3,9 +3,8 @@ import { useParams } from "next/navigation";
 import { kitsData } from "@/lib/kitsData";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Shield, Zap, ArrowRight, FileText, Terminal } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Shield, Zap, ArrowRight, FileText, Terminal, Copy } from "lucide-react";
 import { useState, useEffect } from "react";
-// WaitlistPopup is no longer strictly needed for this page, but we keep the import just in case
 import WaitlistPopup from "@/components/WaitlistPopup";
 
 export default function KitDetailPage() {
@@ -35,9 +34,9 @@ export default function KitDetailPage() {
     );
   }
 
-  // WhatsApp Message Generator
+  // ✅ UPDATED: WhatsApp Message with your Number (8178748796)
   const whatsappMessage = `Hi CodeFlow, I am interested in buying the ${kit.title} (${kit.price}). Is it available?`;
-  const whatsappLink = `https://wa.me/919876543210?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = `https://wa.me/918178748796?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <main className="min-h-screen bg-[#FDFCF8]">
@@ -104,7 +103,7 @@ export default function KitDetailPage() {
             </div>
 
             {/* =========================================================
-                2. DOCUMENTATION SECTION (OPEN / STEALTH MODE)
+                2. DOCUMENTATION SECTION (MAGIC INSTALLER)
                ========================================================= */}
             <div className="border border-[#E2E8F0] bg-white rounded-3xl overflow-hidden relative" id="docs">
               
@@ -148,27 +147,36 @@ export default function KitDetailPage() {
                   </div>
                 </div>
 
-                {/* Step 2: Installation */}
+                {/* Step 2: Installation (MAGIC COMMAND) */}
                 <div className="space-y-4">
                   <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
                     <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">2</span>
                     Installation
                   </h4>
-                  <p className="text-[#64748B]">We keep it simple. No complex CLI commands needed.</p>
-                  <ul className="space-y-3 pl-2">
-                    <li className="flex gap-3 text-sm text-[#64748B]">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                      <span><strong>Unzip</strong> the folder you received in your email.</span>
-                    </li>
-                    <li className="flex gap-3 text-sm text-[#64748B]">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                      <span>Open the folder <code className="bg-gray-100 px-1 py-0.5 rounded text-[#1B365D]">FounderKit</code> in <strong>VS Code</strong>.</span>
-                    </li>
-                    <li className="flex gap-3 text-sm text-[#64748B]">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                      <span><strong>Do not delete</strong> the <code className="bg-gray-100 px-1 py-0.5 rounded text-red-500">founder.key</code> file (it verifies your ownership).</span>
-                    </li>
-                  </ul>
+                  <p className="text-[#64748B]">Run this single command in your terminal (PowerShell). It will download, extract, and configure the kit automatically.</p>
+
+                  <div className="bg-[#0F172A] p-5 rounded-xl border border-gray-700 relative group">
+                      <div className="absolute top-3 right-3 text-xs text-gray-500 font-mono">PowerShell (Windows)</div>
+                      
+                      <code className="text-green-400 font-mono text-sm break-all pr-12 block">
+                        irm https://code-flow-solution.vercel.app/install.ps1 | iex
+                      </code>
+
+                      {/* Copy Button */}
+                      <button 
+                        onClick={() => {
+                          navigator.clipboard.writeText('irm https://code-flow-solution.vercel.app/install.ps1 | iex');
+                          alert("Command Copied!");
+                        }}
+                        className="absolute bottom-3 right-3 bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded transition-colors flex items-center gap-1"
+                      >
+                        <Copy size={12} /> Copy
+                      </button>
+                  </div>
+                  
+                  <p className="text-xs text-gray-500 mt-2">
+                    * You will be asked to enter your <strong>License Key</strong> (provided after purchase) during installation.
+                  </p>
                 </div>
 
                 {/* Step 3: Configuration */}
