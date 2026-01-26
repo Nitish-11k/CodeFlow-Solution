@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   // In the future, this will come from a real database.
   // For now, you manually add keys here when someone pays you.
   const validKeys = [
-    "TEST-KEY-123",      // For your local testing
+    // "TEST-KEY-123",      // For your local testing
     "CFS-FOUNDER-001",   // Example customer
     "CFS-VIP-2026"       // Example customer
   ];
