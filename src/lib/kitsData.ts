@@ -30,7 +30,7 @@ export const kitsData = [
       "Webhook Event Handlers",
       "File Upload (S3/Cloudinary)"
     ],
-    highlight: true,
+    highlight: false,
     color: "bg-[#D4AF37]"
   },
   {
