@@ -127,13 +127,14 @@ export default function KitDetailPage() {
                   {/* --- BLURRED BACKGROUND CONTENT --- */}
                   <div className="opacity-30 blur-[2px] select-none pointer-events-none space-y-6">
                     <div>
-                      <h4 className="text-xl font-bold text-[#1B365D] mb-2">1. Prerequisites</h4>
-                      <p className="text-gray-500 mb-2">Before you begin, ensure you have the following installed:</p>
-                      <ul className="list-disc pl-5 text-gray-500 space-y-1">
-                        <li>Node.js v18 or higher</li>
-                        <li>Java JDK 17 (for Backend)</li>
-                        <li>Docker Desktop</li>
-                      </ul>
+                     <h4 className="text-xl font-bold text-[#1B365D] mb-2">1. Prerequisites</h4>
+                        <p className="text-gray-500 mb-2">Before you begin, ensure you have the following installed:</p>
+                        <ul className="list-disc pl-5 text-gray-500 space-y-1">
+                            <li>.NET 8 SDK</li>
+                            <li>SQL Server (LocalDB or Docker)</li>
+                            <li>VS Code or Visual Studio</li>
+                            <li>Postman (for API testing)</li>
+                          </ul>
                     </div>
                     <div>
                       <h4 className="text-xl font-bold text-[#1B365D] mb-3">2. Installation</h4>

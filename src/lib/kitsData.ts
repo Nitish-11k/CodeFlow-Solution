@@ -1,20 +1,20 @@
 export const kitsData = [
   {
     slug: "starter-core",
-    title: "Starter Core",
+    title: "FounderKit .NET", // Changed name
     price: "₹1,499",
-    tag: "MVP READY",
-    description: "The essential backend foundation to get your startup off the ground immediately.",
-    longDescription: "Perfect for students and first-time founders. This kit gives you a robust, secure, and scalable backend without the headache of setting up servers from scratch.",
+    tag: "BEST SELLER",
+    description: "The complete .NET 8 Web API boilerplate with Auth, OTP, and Licensing built-in.",
+    longDescription: "Stop wasting weeks setting up authentication and database structures. FounderKit gives you a production-ready .NET 8 backend with JWT Auth, Email OTP, Role Management, and a secure Licensing system out of the box.",
     features: [
-      "JWT Authentication System",
-      "User Management API",
-      "PostgreSQL Database Setup",
-      "Dockerized Container",
-      "Basic Swagger Documentation"
+      "JWT Auth & OTP Email Verification", // Updated features
+      "SQL Server + Entity Framework Core",
+      "Secure License Key System",
+      "Global Error Handling & CORS",
+      "Clean Architecture (DDD)"
     ],
-    highlight: false,
-    color: "bg-blue-500"
+    highlight: true, // Highlight this one
+    color: "bg-[#1B365D]"
   },
   {
     slug: "nexus-integrator",
