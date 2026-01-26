@@ -3,26 +3,23 @@ import { useParams } from "next/navigation";
 import { kitsData } from "@/lib/kitsData";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Shield, Zap, Rocket, FileText, Lock, Terminal } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Shield, Zap, ArrowRight, FileText, Terminal } from "lucide-react";
 import { useState, useEffect } from "react";
+// WaitlistPopup is no longer strictly needed for this page, but we keep the import just in case
 import WaitlistPopup from "@/components/WaitlistPopup";
 
 export default function KitDetailPage() {
-  // ✅ FIX 1: Generic hata diya (Next.js isse support nahi karta)
   const params = useParams();
-  
   const [slug, setSlug] = useState<string>("");
 
   useEffect(() => {
     if (params?.slug) {
-      // ✅ FIX 2: Check kiya ki slug string hai ya array, taaki Type Error na aaye
       const finalSlug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
       setSlug(finalSlug);
     }
   }, [params]);
 
   const kit = kitsData.find((k) => k.slug === slug);
-  const [showWaitlist, setShowWaitlist] = useState(false);
 
   // Show loading while slug is being determined
   if (!slug) {
@@ -38,17 +35,14 @@ export default function KitDetailPage() {
     );
   }
 
+  // WhatsApp Message Generator
+  const whatsappMessage = `Hi CodeFlow, I am interested in buying the ${kit.title} (${kit.price}). Is it available?`;
+  const whatsappLink = `https://wa.me/919876543210?text=${encodeURIComponent(whatsappMessage)}`;
+
   return (
     <main className="min-h-screen bg-[#FDFCF8]">
       <Navbar />
       
-      {showWaitlist && (
-        <div className="fixed inset-0 z-[9999]">
-           <WaitlistPopup />
-           <div className="hidden" onClick={() => setShowWaitlist(false)}></div>
-        </div>
-      )}
-
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
         
         {/* Back Link */}
@@ -58,7 +52,9 @@ export default function KitDetailPage() {
 
         <div className="grid lg:grid-cols-3 gap-12">
           
-          {/* --- LEFT: DETAILS --- */}
+          {/* =======================
+              LEFT COLUMN: DETAILS 
+             ======================= */}
           <div className="lg:col-span-2 space-y-12">
             
             {/* 1. Main Info */}
@@ -107,70 +103,141 @@ export default function KitDetailPage() {
               </div>
             </div>
 
-            {/* 2. DOCUMENTATION SECTION (Locked State) */}
-            <div className="border border-[#E2E8F0] bg-white rounded-3xl overflow-hidden relative">
-               
-               {/* Header */}
-               <div className="bg-gray-50 border-b border-[#E2E8F0] p-6 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-[#1B365D] flex items-center gap-2">
-                    <FileText size={20} /> Setup Documentation
-                  </h3>
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                  </div>
-               </div>
+            {/* =========================================================
+                2. DOCUMENTATION SECTION (OPEN / STEALTH MODE)
+               ========================================================= */}
+            <div className="border border-[#E2E8F0] bg-white rounded-3xl overflow-hidden relative" id="docs">
+              
+              {/* Header */}
+              <div className="bg-gray-50 border-b border-[#E2E8F0] p-6 flex items-center justify-between">
+                <h3 className="text-lg font-bold text-[#1B365D] flex items-center gap-2">
+                  <FileText size={20} /> Setup Documentation
+                </h3>
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+              </div>
 
-               <div className="relative p-8 min-h-[300px]">
-                  
-                  {/* --- BLURRED BACKGROUND CONTENT --- */}
-                  <div className="opacity-30 blur-[2px] select-none pointer-events-none space-y-6">
-                    <div>
-                     <h4 className="text-xl font-bold text-[#1B365D] mb-2">1. Prerequisites</h4>
-                        <p className="text-gray-500 mb-2">Before you begin, ensure you have the following installed:</p>
-                        <ul className="list-disc pl-5 text-gray-500 space-y-1">
-                            <li>.NET 8 SDK</li>
-                            <li>SQL Server (LocalDB or Docker)</li>
-                            <li>VS Code or Visual Studio</li>
-                            <li>Postman (for API testing)</li>
-                          </ul>
+              {/* Content */}
+              <div className="p-8 text-[#1E293B] space-y-10">
+
+                {/* Step 1: Prerequisites */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">1</span>
+                    Prerequisites
+                  </h4>
+                  <p className="text-[#64748B]">Before you begin, ensure you have the following installed on your machine:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" className="p-4 rounded-xl border border-[#E2E8F0] hover:border-[#D4AF37] hover:bg-blue-50/50 transition-all flex items-center gap-3 group">
+                        <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 font-bold">.NET</div>
+                        <div>
+                          <p className="font-bold text-[#1B365D]">.NET 8 SDK</p>
+                          <p className="text-xs text-gray-500 group-hover:text-[#D4AF37]">Download Required</p>
+                        </div>
+                    </a>
+                    <div className="p-4 rounded-xl border border-[#E2E8F0] flex items-center gap-3">
+                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-bold">SQL</div>
+                        <div>
+                          <p className="font-bold text-[#1B365D]">SQL Server</p>
+                          <p className="text-xs text-gray-500">LocalDB or Docker</p>
+                        </div>
                     </div>
-                    <div>
-                      <h4 className="text-xl font-bold text-[#1B365D] mb-3">2. Installation</h4>
-                      <div className="bg-[#0F172A] p-4 rounded-xl border border-gray-700">
-                         <div className="flex items-center gap-2 text-gray-400 font-mono text-sm mb-2 border-b border-gray-700 pb-2">
-                            <Terminal size={14} /> terminal
-                         </div>
-                         <code className="text-green-400 font-mono text-sm">
-                           git clone https://github.com/codeflow/{kit.slug}.git<br/>
-                           cd {kit.slug}<br/>
-                           npm install
-                         </code>
+                  </div>
+                </div>
+
+                {/* Step 2: Installation */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">2</span>
+                    Installation
+                  </h4>
+                  <p className="text-[#64748B]">We keep it simple. No complex CLI commands needed.</p>
+                  <ul className="space-y-3 pl-2">
+                    <li className="flex gap-3 text-sm text-[#64748B]">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                      <span><strong>Unzip</strong> the folder you received in your email.</span>
+                    </li>
+                    <li className="flex gap-3 text-sm text-[#64748B]">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                      <span>Open the folder <code className="bg-gray-100 px-1 py-0.5 rounded text-[#1B365D]">FounderKit</code> in <strong>VS Code</strong>.</span>
+                    </li>
+                    <li className="flex gap-3 text-sm text-[#64748B]">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                      <span><strong>Do not delete</strong> the <code className="bg-gray-100 px-1 py-0.5 rounded text-red-500">founder.key</code> file (it verifies your ownership).</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Step 3: Configuration */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">3</span>
+                    Configuration
+                  </h4>
+                  <p className="text-[#64748B]">
+                    Open <code className="text-[#D4AF37] font-bold">FounderKit.API/appsettings.json</code> and update your database and email settings.
+                  </p>
+
+                  {/* Code Block for Appsettings */}
+                  <div className="bg-[#0F172A] p-5 rounded-xl border border-gray-700 overflow-x-auto relative group">
+                      <div className="absolute top-3 right-3 text-xs text-gray-500 font-mono">appsettings.json</div>
+                      <pre className="font-mono text-sm leading-relaxed text-gray-300">
+                        <code>
+            <span className="text-[#F07178]">"ConnectionStrings"</span>: &#123;<br/>
+              &nbsp;&nbsp;<span className="text-[#C3E88D]">"DefaultConnection"</span>: <span className="text-[#FFCB6B]">"Server=localhost;Database=MyStartupDB;User Id=sa;Password=YOUR_PASSWORD;TrustServerCertificate=True;"</span><br/>
+            &#125;,<br/>
+            <span className="text-[#F07178]">"EmailSettings"</span>: &#123;<br/>
+              &nbsp;&nbsp;<span className="text-[#C3E88D]">"SenderEmail"</span>: <span className="text-[#FFCB6B]">"your-email@gmail.com"</span>,<br/>
+              &nbsp;&nbsp;<span className="text-[#C3E88D]">"Password"</span>: <span className="text-[#FFCB6B]">"your-app-password"</span><br/>
+            &#125;
+                        </code>
+                      </pre>
+                  </div>
+                </div>
+
+                {/* Step 4: Run */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">4</span>
+                    Launch the API
+                  </h4>
+                  <p className="text-[#64748B]">Open your terminal and run the following commands:</p>
+
+                  <div className="bg-[#0F172A] p-4 rounded-xl border border-gray-700">
+                      <div className="flex items-center gap-2 text-gray-400 font-mono text-xs mb-3 border-b border-gray-700 pb-2">
+                        <Terminal size={14} /> terminal
                       </div>
-                    </div>
+                      <code className="text-green-400 font-mono text-sm block mb-2">
+                        # 1. Create the database
+                      </code>
+                      <code className="text-white font-mono text-sm block mb-4 pl-4 border-l-2 border-gray-700">
+                        dotnet ef database update --project FounderKit.Infrastructure --startup-project FounderKit.API
+                      </code>
+                      
+                      <code className="text-green-400 font-mono text-sm block mb-2">
+                        # 2. Start the server
+                      </code>
+                      <code className="text-white font-mono text-sm block pl-4 border-l-2 border-gray-700">
+                        dotnet run --project FounderKit.API
+                      </code>
                   </div>
 
-                  {/* --- LOCKED OVERLAY --- */}
-                  <div className="absolute inset-0 z-10 bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6">
-                     <div className="w-16 h-16 bg-white border-2 border-[#E2E8F0] rounded-2xl flex items-center justify-center mb-4 shadow-lg">
-                        <Lock size={32} className="text-[#D4AF37]" />
-                     </div>
-                     <h3 className="text-2xl font-black text-[#1B365D] mb-2">Documentation Locked</h3>
-                     <p className="text-[#64748B] max-w-md">
-                       Detailed setup guides, API references, and deployment instructions will be available here automatically once the kit is available.
-                     </p>
-                     <div className="mt-6 px-4 py-2 bg-[#1B365D]/5 text-[#1B365D] text-sm font-bold rounded-lg border border-[#1B365D]/10">
-                        Coming Soon
-                     </div>
+                  <div className="p-4 bg-green-50 text-green-800 rounded-xl text-sm border border-green-200">
+                    <strong>Success!</strong> Your API will be running at <u>http://localhost:5000/swagger</u>
                   </div>
+                </div>
 
-               </div>
+              </div>
             </div>
 
           </div>
 
-          {/* --- RIGHT: PRICING CARD (Sticky) --- */}
+          {/* =================================
+              RIGHT COLUMN: PRICING (STICKY) 
+             ================================= */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-white p-8 rounded-3xl border border-[#D4AF37]/30 shadow-2xl shadow-[#1B365D]/10">
               
@@ -187,16 +254,20 @@ export default function KitDetailPage() {
               </div>
 
               <div className="space-y-4">
-                <button 
-                  onClick={() => setShowWaitlist(true)}
-                  className="w-full py-4 bg-[#1B365D] text-white font-bold rounded-xl hover:bg-[#2C4A7C] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 group"
+                
+                {/* --- WHATSAPP BUY BUTTON --- */}
+                <a 
+                  href={whatsappLink} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#20bd5a] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 group"
                 >
-                  <span>Join Waitlist to Buy</span>
-                  <Rocket size={18} className="text-[#D4AF37] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </button>
+                  <span>Buy via WhatsApp</span>
+                  <ArrowRight size={18} className="text-white group-hover:translate-x-1 transition-transform" />
+                </a>
                 
                 <p className="text-center text-xs text-[#94A3B8] leading-snug">
-                  * By joining the waitlist, you get early access and a special discount when we launch.
+                  * Instant delivery via Email/Drive after payment verification.
                 </p>
               </div>
 
