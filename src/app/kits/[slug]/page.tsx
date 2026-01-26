@@ -3,9 +3,11 @@ import { useParams } from "next/navigation";
 import { kitsData } from "@/lib/kitsData";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Shield, Zap, ArrowRight, FileText, Terminal, Copy } from "lucide-react";
+import { 
+  ArrowLeft, CheckCircle2, Shield, Zap, ArrowRight, 
+  FileText, Terminal, Copy, LifeBuoy, Mail, MessageCircle, AlertCircle 
+} from "lucide-react";
 import { useState, useEffect } from "react";
-import WaitlistPopup from "@/components/WaitlistPopup";
 
 export default function KitDetailPage() {
   const params = useParams();
@@ -20,10 +22,7 @@ export default function KitDetailPage() {
 
   const kit = kitsData.find((k) => k.slug === slug);
 
-  // Show loading while slug is being determined
-  if (!slug) {
-     return <div className="min-h-screen bg-[#FDFCF8]" />; 
-  }
+  if (!slug) return <div className="min-h-screen bg-[#FDFCF8]" />; 
 
   if (!kit) {
     return (
@@ -34,9 +33,12 @@ export default function KitDetailPage() {
     );
   }
 
-  // ✅ UPDATED: WhatsApp Message with your Number (8178748796)
+  // WhatsApp Links
   const whatsappMessage = `Hi CodeFlow, I am interested in buying the ${kit.title} (${kit.price}). Is it available?`;
-  const whatsappLink = `https://wa.me/918178748796?text=${encodeURIComponent(whatsappMessage)}`;
+  const buyLink = `https://wa.me/918178748796?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  const supportMessage = `Hi CodeFlow, I bought the kit but I am facing an issue. Please help.`;
+  const supportLink = `https://wa.me/918178748796?text=${encodeURIComponent(supportMessage)}`;
 
   return (
     <main className="min-h-screen bg-[#FDFCF8]">
@@ -44,7 +46,6 @@ export default function KitDetailPage() {
       
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
         
-        {/* Back Link */}
         <Link href="/#kits" className="inline-flex items-center gap-2 text-[#64748B] hover:text-[#1B365D] mb-8 transition-colors">
           <ArrowLeft size={18} /> Back to All Kits
         </Link>
@@ -79,90 +80,36 @@ export default function KitDetailPage() {
                       <span className="text-[#64748B]">{feat}</span>
                     </div>
                   ))}
-                  <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                      <span className="text-[#64748B]">Clean Architecture</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                      <span className="text-[#64748B]">Environment Config</span>
-                  </div>
                 </div>
-              </div>
-
-              <div className="bg-[#1B365D] p-8 rounded-3xl text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-3xl -mr-10 -mt-10" />
-                <h3 className="text-xl font-bold mb-4 relative z-10 flex items-center gap-2">
-                  <Shield className="text-[#D4AF37]" /> Why choose this kit?
-                </h3>
-                <p className="text-blue-100 relative z-10 leading-relaxed">
-                  We have spent hundreds of hours refining this architecture so you don't have to. 
-                  It is battle-tested, secure by default, and ready to deploy to production from Day 1.
-                </p>
               </div>
             </div>
 
             {/* =========================================================
-                2. DOCUMENTATION SECTION (MAGIC INSTALLER)
+                2. DOCUMENTATION SECTION (STEP-BY-STEP GUIDANCE)
                ========================================================= */}
             <div className="border border-[#E2E8F0] bg-white rounded-3xl overflow-hidden relative" id="docs">
               
-              {/* Header */}
               <div className="bg-gray-50 border-b border-[#E2E8F0] p-6 flex items-center justify-between">
                 <h3 className="text-lg font-bold text-[#1B365D] flex items-center gap-2">
                   <FileText size={20} /> Setup Documentation
                 </h3>
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                </div>
               </div>
 
-              {/* Content */}
               <div className="p-8 text-[#1E293B] space-y-10">
 
-                {/* Step 1: Prerequisites */}
+                {/* Step 1: Install */}
                 <div className="space-y-4">
                   <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
                     <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">1</span>
-                    Prerequisites
+                    Download & Install
                   </h4>
-                  <p className="text-[#64748B]">Before you begin, ensure you have the following installed on your machine:</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" className="p-4 rounded-xl border border-[#E2E8F0] hover:border-[#D4AF37] hover:bg-blue-50/50 transition-all flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 font-bold">.NET</div>
-                        <div>
-                          <p className="font-bold text-[#1B365D]">.NET 8 SDK</p>
-                          <p className="text-xs text-gray-500 group-hover:text-[#D4AF37]">Download Required</p>
-                        </div>
-                    </a>
-                    <div className="p-4 rounded-xl border border-[#E2E8F0] flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-bold">SQL</div>
-                        <div>
-                          <p className="font-bold text-[#1B365D]">SQL Server</p>
-                          <p className="text-xs text-gray-500">LocalDB or Docker</p>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 2: Installation (MAGIC COMMAND) */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
-                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">2</span>
-                    Installation
-                  </h4>
-                  <p className="text-[#64748B]">Run this single command in your terminal (PowerShell). It will download, extract, and configure the kit automatically.</p>
+                  <p className="text-[#64748B]">Run this command in <strong>PowerShell</strong>. It will download the kit and configure your license automatically.</p>
 
                   <div className="bg-[#0F172A] p-5 rounded-xl border border-gray-700 relative group">
-                      <div className="absolute top-3 right-3 text-xs text-gray-500 font-mono">PowerShell (Windows)</div>
-                      
-                      <code className="text-green-400 font-mono text-sm break-all pr-12 block">
+                      <div className="absolute top-3 right-3 text-xs text-gray-500 font-mono">PowerShell</div>
+                      <code className="text-green-400 font-mono text-sm break-all pr-16 block">
                         irm https://code-flow-solution.vercel.app/install.ps1 | iex
                       </code>
-
-                      {/* Copy Button */}
                       <button 
                         onClick={() => {
                           navigator.clipboard.writeText('irm https://code-flow-solution.vercel.app/install.ps1 | iex');
@@ -173,36 +120,41 @@ export default function KitDetailPage() {
                         <Copy size={12} /> Copy
                       </button>
                   </div>
-                  
-                  <p className="text-xs text-gray-500 mt-2">
-                    * You will be asked to enter your <strong>License Key</strong> (provided after purchase) during installation.
-                  </p>
                 </div>
 
-                {/* Step 3: Configuration */}
+                {/* Step 2: Configure */}
                 <div className="space-y-4">
                   <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
-                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">3</span>
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">2</span>
                     Configuration
                   </h4>
                   <p className="text-[#64748B]">
-                    Open <code className="text-[#D4AF37] font-bold">FounderKit.API/appsettings.json</code> and update your database and email settings.
+                    Open <code className="bg-gray-100 px-1 rounded text-[#1B365D]">FounderKit.API/appsettings.json</code> and update your Connection String.
+                  </p>
+                  <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+                    <p className="font-mono text-sm text-gray-600">"ConnectionStrings": &#123; "DefaultConnection": "..." &#125;</p>
+                  </div>
+                </div>
+
+                {/* Step 3: Database (RESTORE TOOL) */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
+                    <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">3</span>
+                    Database Setup (Important)
+                  </h4>
+                  <p className="text-[#64748B]">
+                    Run these commands inside the folder to restore tools and create the database.
                   </p>
 
-                  {/* Code Block for Appsettings */}
-                  <div className="bg-[#0F172A] p-5 rounded-xl border border-gray-700 overflow-x-auto relative group">
-                      <div className="absolute top-3 right-3 text-xs text-gray-500 font-mono">appsettings.json</div>
-                      <pre className="font-mono text-sm leading-relaxed text-gray-300">
-                        <code>
-            <span className="text-[#F07178]">"ConnectionStrings"</span>: &#123;<br/>
-              &nbsp;&nbsp;<span className="text-[#C3E88D]">"DefaultConnection"</span>: <span className="text-[#FFCB6B]">"Server=localhost;Database=MyStartupDB;User Id=sa;Password=YOUR_PASSWORD;TrustServerCertificate=True;"</span><br/>
-            &#125;,<br/>
-            <span className="text-[#F07178]">"EmailSettings"</span>: &#123;<br/>
-              &nbsp;&nbsp;<span className="text-[#C3E88D]">"SenderEmail"</span>: <span className="text-[#FFCB6B]">"your-email@gmail.com"</span>,<br/>
-              &nbsp;&nbsp;<span className="text-[#C3E88D]">"Password"</span>: <span className="text-[#FFCB6B]">"your-app-password"</span><br/>
-            &#125;
-                        </code>
-                      </pre>
+                  <div className="bg-[#0F172A] p-4 rounded-xl border border-gray-700 space-y-4">
+                      <div>
+                        <p className="text-gray-400 text-xs mb-1"># 1. Restore .NET Tools (Fixes 'ef not found' error)</p>
+                        <code className="text-green-400 font-mono text-sm block">dotnet tool restore</code>
+                      </div>
+                      <div>
+                         <p className="text-gray-400 text-xs mb-1"># 2. Create Database Tables</p>
+                         <code className="text-white font-mono text-sm block">dotnet ef database update --project FounderKit.Infrastructure --startup-project FounderKit.API</code>
+                      </div>
                   </div>
                 </div>
 
@@ -210,32 +162,52 @@ export default function KitDetailPage() {
                 <div className="space-y-4">
                   <h4 className="text-xl font-bold text-[#1B365D] flex items-center gap-2">
                     <span className="bg-[#1B365D] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">4</span>
-                    Launch the API
+                    Launch API
                   </h4>
-                  <p className="text-[#64748B]">Open your terminal and run the following commands:</p>
-
                   <div className="bg-[#0F172A] p-4 rounded-xl border border-gray-700">
-                      <div className="flex items-center gap-2 text-gray-400 font-mono text-xs mb-3 border-b border-gray-700 pb-2">
-                        <Terminal size={14} /> terminal
-                      </div>
-                      <code className="text-green-400 font-mono text-sm block mb-2">
-                        # 1. Create the database
-                      </code>
-                      <code className="text-white font-mono text-sm block mb-4 pl-4 border-l-2 border-gray-700">
-                        dotnet ef database update --project FounderKit.Infrastructure --startup-project FounderKit.API
-                      </code>
-                      
-                      <code className="text-green-400 font-mono text-sm block mb-2">
-                        # 2. Start the server
-                      </code>
-                      <code className="text-white font-mono text-sm block pl-4 border-l-2 border-gray-700">
-                        dotnet run --project FounderKit.API
-                      </code>
+                      <code className="text-green-400 font-mono text-sm block">dotnet run --project FounderKit.API</code>
                   </div>
+                  <div className="p-3 bg-green-50 text-green-700 text-sm rounded-lg flex items-center gap-2">
+                    <CheckCircle2 size={16} /> Your API will be live at <strong>http://localhost:5xxx/swagger</strong>
+                  </div>
+                </div>
 
-                  <div className="p-4 bg-green-50 text-green-800 rounded-xl text-sm border border-green-200">
-                    <strong>Success!</strong> Your API will be running at <u>http://localhost:5000/swagger</u>
-                  </div>
+                {/* --- TROUBLESHOOTING & SUPPORT --- */}
+                <div className="mt-8 pt-8 border-t border-dashed border-gray-200">
+                   <h4 className="text-lg font-bold text-[#1B365D] mb-4 flex items-center gap-2">
+                     <LifeBuoy className="text-[#D4AF37]" size={20} /> Stuck? We are here.
+                   </h4>
+                   
+                   <div className="grid md:grid-cols-2 gap-4">
+                      {/* WhatsApp Support */}
+                      <a href={supportLink} target="_blank" className="flex items-center gap-4 p-4 rounded-xl border border-[#E2E8F0] hover:border-green-400 hover:bg-green-50 transition-all group">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                          <MessageCircle size={20} />
+                        </div>
+                        <div>
+                          <p className="font-bold text-[#1B365D]">WhatsApp Support</p>
+                          <p className="text-xs text-gray-500">Instant chat with devs</p>
+                        </div>
+                      </a>
+
+                      {/* Email Support */}
+                      <a href="mailto:solutioncodeflow@gmail.com" className="flex items-center gap-4 p-4 rounded-xl border border-[#E2E8F0] hover:border-blue-400 hover:bg-blue-50 transition-all group">
+                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                          <Mail size={20} />
+                        </div>
+                        <div>
+                          <p className="font-bold text-[#1B365D]">Email Us</p>
+                          <p className="text-xs text-gray-500">solutioncodeflow@gmail.com</p>
+                        </div>
+                      </a>
+                   </div>
+
+                   <div className="mt-4 p-4 bg-yellow-50 text-yellow-800 text-sm rounded-xl flex items-start gap-3">
+                      <AlertCircle className="shrink-0 mt-0.5" size={18} />
+                      <p>
+                        <strong>Common Error:</strong> If you see "Command not found", make sure you installed the <strong>.NET 8 SDK</strong> and ran <code>dotnet tool restore</code> in Step 3.
+                      </p>
+                   </div>
                 </div>
 
               </div>
@@ -265,7 +237,7 @@ export default function KitDetailPage() {
                 
                 {/* --- WHATSAPP BUY BUTTON --- */}
                 <a 
-                  href={whatsappLink} 
+                  href={buyLink} 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-4 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#20bd5a] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 group"
