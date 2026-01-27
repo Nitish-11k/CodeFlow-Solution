@@ -6,22 +6,21 @@ export default function TechStack() {
   const [activeCard, setActiveCard] = useState<'stack' | 'vps'>('stack');
 
   return (
-    <section id="stack" className="py-24 bg-[#1B365D] relative overflow-hidden">
-      {/* Background decoration */}
+    // ✅ Updated BG
+    <section id="stack" className="py-24 bg-[#020617] relative overflow-hidden">
+      
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
-      {/* UPDATED: Reduced gap from gap-20 to gap-10 for better mobile spacing */}
       <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 relative z-10">
         
         {/* LEFT: Text Section */}
-        {/* Reduced bottom margin */}
         <div className="w-full lg:flex-1 text-center lg:text-left mb-2 lg:mb-0">
-          <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FDFCF8] mb-6 drop-shadow-[0_4px_0_rgba(0,0,0,0.5)] leading-[1.1]">
+          <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-white mb-6 drop-shadow-[0_4px_0_rgba(0,0,0,0.5)] leading-[1.1]">
             OUR <br />
             TECH <br />
             STACK
           </h2>
-          <p className="text-[#94A3B8] text-lg max-w-md mx-auto lg:mx-0">
+          <p className="text-gray-400 text-lg max-w-md mx-auto lg:mx-0">
             Enterprise-grade technologies configured for maximum scalability and zero downtime.
           </p>
           <p className="mt-6 text-[#D4AF37] text-sm font-mono animate-pulse">
@@ -29,13 +28,10 @@ export default function TechStack() {
           </p>
         </div>
 
-        {/* RIGHT: The Shuffling Cards Area */}
-        {/* Adjusted height to h-[320px] on mobile to remove extra bottom space */}
+        {/* RIGHT: Cards (Same logic, ensured dark backgrounds) */}
         <div className="w-full lg:flex-1 max-w-2xl relative h-[320px] lg:h-[450px] flex items-center justify-center perspective-1000">
           
-          {/* ==============================================
-              CARD 1: VPS HOSTING
-             ============================================== */}
+          {/* Card 1: VPS */}
           <div 
             onClick={() => setActiveCard('vps')}
             className={`absolute w-full max-w-[500px] transition-all duration-700 cubic-bezier(0.25, 0.8, 0.25, 1) transform origin-bottom
@@ -51,13 +47,11 @@ export default function TechStack() {
                   <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                   <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                 </div>
-                <div className="text-[#64748B] text-xs font-mono flex items-center gap-2">
+                <div className="text-gray-400 text-xs font-mono flex items-center gap-2">
                   <Server size={12} /> vps_config.yml
                 </div>
                 <div className="w-4"></div>
               </div>
-              
-              {/* UPDATED: Fixed Height (h-64) to ensure exact shape match */}
               <div className="p-6 overflow-x-auto h-64 flex flex-col justify-center">
                 <pre className="font-mono text-sm leading-relaxed text-gray-400">
                   <code className="language-yaml">
@@ -74,9 +68,7 @@ export default function TechStack() {
             </div>
           </div>
 
-          {/* ==============================================
-              CARD 2: TECH STACK
-             ============================================== */}
+          {/* Card 2: Stack */}
           <div 
             onClick={() => setActiveCard('stack')}
             className={`absolute w-full max-w-[500px] transition-all duration-700 cubic-bezier(0.25, 0.8, 0.25, 1) transform origin-bottom
@@ -92,13 +84,11 @@ export default function TechStack() {
                   <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                   <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                 </div>
-                <div className="text-[#64748B] text-xs font-mono flex items-center gap-2">
+                <div className="text-gray-400 text-xs font-mono flex items-center gap-2">
                   <Terminal size={12} /> config.ts
                 </div>
-                <Copy size={14} className="text-[#64748B]" />
+                <Copy size={14} className="text-gray-400" />
               </div>
-              
-              {/* UPDATED: Fixed Height (h-64) to ensure exact shape match */}
               <div className="p-6 overflow-x-auto h-64 flex flex-col justify-center">
                 <pre className="font-mono text-sm leading-relaxed">
                   <code className="language-javascript">

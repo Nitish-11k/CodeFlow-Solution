@@ -46,11 +46,11 @@ export default function Hosting() {
   const nextIndex = (activeIndex + 1) % plans.length;
 
   return (
-    <section id="hosting" className="py-24 bg-[#1B365D] relative overflow-hidden min-h-screen flex flex-col justify-center">
-      {/* Background decoration */}
+    // ✅ Updated BG
+    <section id="hosting" className="py-24 bg-[#020617] relative overflow-hidden min-h-screen flex flex-col justify-center">
+      
       <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
-      {/* Global Style Injection for the Animation */}
       <style dangerouslySetInnerHTML={{__html: `
         .cards {
           position: relative;
@@ -107,10 +107,8 @@ export default function Hosting() {
         }
       `}} />
 
-      {/* Added gap-16 to create space between text and cards on mobile */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center relative z-10 w-full">
         
-        {/* RIGHT SIDE (TEXT): Order 1 on Mobile, Order 2 on Desktop */}
         <div className="text-center lg:text-left order-1 lg:order-2">
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-[#94A3B8] mb-6">
             PREMIUM <br />
@@ -137,7 +135,6 @@ export default function Hosting() {
           </div>
         </div>
 
-        {/* LEFT SIDE (CARDS): Order 2 on Mobile, Order 1 on Desktop */}
         <div className="relative h-[450px] w-full max-w-[400px] mx-auto order-2 lg:order-1">
           
           <ul className="cards">
@@ -149,7 +146,6 @@ export default function Hosting() {
 
               return (
                 <li key={index} className={className} onClick={() => handleCardClick(index)}>
-                  {/* Card Content */}
                   <div className="h-full flex flex-col justify-between pointer-events-none">
                     
                     <div className="flex justify-between items-center border-b border-white/10 pb-4">

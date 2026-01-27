@@ -1,3 +1,4 @@
+import { Suspense } from "react"; // Import Suspense
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Mission from "../components/Mission";
@@ -5,16 +6,21 @@ import Kits from "../components/Kits";
 import Hosting from "../components/Hosting";
 import TechStack from "../components/TechStack";
 import Contact from "../components/Contact";
-import WaitlistPopup from "../components/WaitlistPopup"; // <--- Import this
+import WaitlistPopup from "../components/WaitlistPopup"; 
 import Footer from "@/components/Footer";
-import Comparison from "@/components/Comparison";
 import BlogPreview from "@/components/BlogPreview";
 import Roadmap from "@/components/Roadmap";
+import ScrollManager from "@/components/ScrollManager"; // Import Manager
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <WaitlistPopup /> {/* <--- Add this here */}
+    <main className="min-h-screen bg-[#020617]"> 
+      {/* ✅ Scroll Logic Here */}
+      <Suspense fallback={null}>
+        <ScrollManager />
+      </Suspense>
+
+      <WaitlistPopup />
       
       <Navbar />
       <Hero />
@@ -22,17 +28,13 @@ export default function Home() {
       <Kits />
       <Hosting />
       <TechStack />
-      {/* <Comparison />  <-- Yahan lagaya */}
-     
-     <BlogPreview />
-      <Roadmap />     {/* <-- Yahan lagaya */}
-    
-      <Contact /> 
-      <Footer/>
       
-      <footer className="py-8 text-center text-[#64748B] text-sm bg-[#FDFCF8] border-t border-[#E2E8F0]">
-        <p>© 2026 CodeFlow.Solution. Building MVPs for Founders.</p>
-      </footer>
+      <BlogPreview />
+      <Roadmap />
+      
+      <Contact /> 
+      
+      <Footer/>
     </main>
   );
 }

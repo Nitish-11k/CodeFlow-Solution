@@ -6,38 +6,64 @@
 }
 
 :root {
-  /* Royal Soft Palette */
-  --background: #FDFCF8;       /* Premium Cream White (Soft) */
-  --foreground: #1E293B;       /* Slate Charcoal (Softer than black) */
-  
-  /* The Royal Colors */
-  --primary: #1B365D;          /* Royal Navy Blue (Trust/Authority) */
-  --accent: #D4AF37;           /* Soft Champagne Gold (Premium) */
-  --secondary: #F1F5F9;        /* Soft Blue-Grey (Section backgrounds) */
-  --border: #E2E8F0;           
+  /* --- ULTRA PREMIUM PALETTE --- */
+  --background: #020617; /* Deepest Midnight Blue */
+  --foreground: #F8FAFC; /* Soft White */
+  --gold-primary: #F59E0B; /* Rich Amber/Gold */
+  --gold-secondary: #D97706;
 }
 
 html {
-  scroll-behavior: smooth; /* Enables the smooth scroll effect */
+  scroll-behavior: smooth !important;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   antialiased: true;
+  overflow-x: hidden;
 }
-@layer utilities {
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  .transform-style-3d {
-    transform-style: preserve-3d;
-  }
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-  .rotate-y-180 {
-    transform: rotateY(180deg);
-  }
+
+/* --- BACKGROUND NOISE (Adds Texture) --- */
+.bg-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
 }
+
+/* --- PREMIUM TEXT GRADIENTS --- */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 0px 30px rgba(245, 158, 11, 0.3);
+}
+
+.text-gradient-silver {
+  background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- GLASSMORPHISM --- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
+
