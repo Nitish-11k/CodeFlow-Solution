@@ -7,6 +7,9 @@ import TechStack from "../components/TechStack";
 import Contact from "../components/Contact";
 import WaitlistPopup from "../components/WaitlistPopup"; // <--- Import this
 import Footer from "@/components/Footer";
+import Comparison from "@/components/Comparison";
+import BlogPreview from "@/components/BlogPreview";
+import Roadmap from "@/components/Roadmap";
 
 export default function Home() {
   return (
@@ -19,7 +22,12 @@ export default function Home() {
       <Kits />
       <Hosting />
       <TechStack />
-      <Contact />
+      {/* <Comparison />  <-- Yahan lagaya */}
+     
+     <BlogPreview />
+      <Roadmap />     {/* <-- Yahan lagaya */}
+    
+      <Contact /> 
       <Footer/>
       
       <footer className="py-8 text-center text-[#64748B] text-sm bg-[#FDFCF8] border-t border-[#E2E8F0]">
