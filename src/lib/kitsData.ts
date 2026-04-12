@@ -36,24 +36,6 @@ export const kitsData = [
     color: "bg-blue-900"
   },
   {
-    slug: "nexus-integrator",
-    title: "Nexus Integrator",
-    tag: "POPULAR",
-    stack: ".NET 8",
-    status: "Under Construction",
-    description: "Connect your app to the world with pre-built third-party integration modules.",
-    longDescription: "Designed for startups that need to handle payments, emails, and file uploads. We have pre-written the complex logic for Stripe/Razorpay and AWS S3 so you don't have to.",
-    features: [
-      "Stripe & Razorpay Payments",
-      "SendGrid Email Templates",
-      "Twilio SMS Integration",
-      "Webhook Event Handlers",
-      "File Upload (S3/Cloudinary)"
-    ],
-    highlight: false,
-    color: "bg-[#D4AF37]"
-  },
-  {
     slug: "bespoke-forge",
     title: "Bespoke Forge",
     tag: "FULL SERVICE",
@@ -70,5 +52,23 @@ export const kitsData = [
     ],
     highlight: false,
     color: "bg-slate-800"
+  },
+  {
+    slug: "vps-cloud",
+    title: "Premium VPS Cloud",
+    tag: "INFRASTRUCTURE",
+    stack: "Linux/Ubuntu",
+    status: "VPS",
+    description: "Enterprise-grade hosting solutions for your FounderKit backends.",
+    longDescription: "Deploy your architecture on high-performance infrastructure optimized for FounderKit. We provide managed VPS solutions that ensure your backend remains fast, secure, and always online.",
+    features: [
+      "99.9% Uptime SLA",
+      "High-Performance NVMe",
+      "DDoS Protection Included",
+      "Auto-scaling Ready",
+      "Managed Security Updates"
+    ],
+    highlight: false,
+    color: "bg-indigo-900"
   }
 ];
