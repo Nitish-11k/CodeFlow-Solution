@@ -4,6 +4,7 @@ import { CheckCircle2, Shield, Zap } from "lucide-react";
 export default function Mission() {
   return (
     <section id="mission" className="py-24 bg-[var(--background)] relative border-y border-[var(--border-color)] transition-colors duration-500">
+      <h2 className="sr-only">Our Core Values</h2>
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
         <div className="space-y-4">
           <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center text-[#D4AF37] mx-auto md:mx-0">

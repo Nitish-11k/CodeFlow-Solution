@@ -26,9 +26,18 @@ export default function Footer() {
               Engineering the structural backbone of your Next-Gen startups. Backend excellence, redefined.
             </p>
             <div className="flex gap-4">
-              {[Twitter, Github, Linkedin].map((Icon, idx) => (
-                <a key={idx} href="#" className="w-10 h-10 rounded-lg bg-white/5 border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:border-[var(--gold-primary)] transition-all">
-                  <Icon size={18} />
+              {[
+                { Icon: Twitter, label: "Twitter" },
+                { Icon: Github, label: "GitHub" },
+                { Icon: Linkedin, label: "LinkedIn" }
+              ].map((social, idx) => (
+                <a 
+                  key={idx} 
+                  href="#" 
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:border-[var(--gold-primary)] transition-all"
+                >
+                  <social.Icon size={18} />
                 </a>
               ))}
             </div>

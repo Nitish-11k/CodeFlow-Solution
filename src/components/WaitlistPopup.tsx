@@ -82,6 +82,7 @@ export default function WaitlistPopup() {
 
             <button 
               onClick={handleClose}
+              aria-label="Close modal"
               className="absolute top-4 right-4 p-2 text-[var(--text-secondary)] hover:text-[#1B365D] hover:bg-gray-100 rounded-full transition-all z-50 cursor-pointer"
             >
               <X size={20} />
@@ -103,7 +104,7 @@ export default function WaitlistPopup() {
                     <Check className="w-10 h-10 text-green-500" />
                   </motion.div>
                   <h2 className="text-2xl font-black text-[#1B365D] mb-2">You're on the list!</h2>
-                  <p className="text-[#64748B] mb-4">
+                  <p className="text-[#334155] mb-4 font-medium">
                     Welcome to the inner circle. We'll send your exclusive access code soon.
                   </p>
                   <div className="inline-block px-4 py-2 bg-green-50 text-green-700 text-xs font-bold rounded-lg border border-green-200">
@@ -113,16 +114,16 @@ export default function WaitlistPopup() {
               ) : (
                 <>
                   <div className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FFF9E6] border border-[#D4AF37]/20 rounded-full text-[#D4AF37] text-xs font-bold uppercase tracking-wider mb-5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FEF3C7] border border-[#B45309]/20 rounded-full text-[#B45309] text-xs font-black uppercase tracking-wider mb-5">
                       <Sparkles size={12} /> Priority Access
                     </div>
                     <h2 className="text-3xl font-black text-[#1B365D] mb-3 leading-tight">
                       Don't Build From Scratch.
                     </h2>
-                    <p className="text-[#64748B] text-base leading-relaxed">
-                      Get the <strong>Founder Kits</strong> that save you months of dev time. Join the waitlist to get <span className="text-[#D4AF37] font-bold">priority access</span> on launch day.
+                    <p className="text-[#334155] text-base leading-relaxed font-medium">
+                      Get the <strong>Founder Kits</strong> that save you months of dev time. Join the waitlist to get <span className="text-[#B45309] font-black">priority access</span> on launch day.
                     </p>
-                    <p className="text-xs font-bold text-[#1B365D] mt-2 bg-blue-50 inline-block px-3 py-1 rounded-lg">
+                    <p className="text-xs font-black text-[#1B365D] mt-2 bg-blue-50 inline-block px-3 py-1 rounded-lg">
                       Limited offer for the first 20 founders.
                     </p>
                   </div>

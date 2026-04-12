@@ -123,6 +123,7 @@ export default function Navbar() {
             <button 
               onClick={toggleTheme}
               className="p-2.5 rounded-xl bg-white/5 border border-[var(--border-color)] hover:bg-white/10 transition-all text-[var(--text-secondary)] hover:text-[var(--gold-primary)]"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
               title="Toggle Theme"
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
@@ -133,6 +134,8 @@ export default function Navbar() {
             <button 
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="lg:hidden p-2 text-[var(--text-primary)] hover:bg-white/10 rounded-full transition-colors relative z-[70]"
+              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileOpen}
             >
               {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
             </button>

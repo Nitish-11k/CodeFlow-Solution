@@ -11,24 +11,24 @@
   --foreground: #F8FAFC;
   --card-bg: #0B1120;
   --card-hover: #0F172A;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --text-primary: #f8fafc;
+  --border-color: rgba(255, 255, 255, 0.12);
+  --text-primary: #f1f5f9; /* Near-white */
   --text-secondary: #94a3b8;
-  --gold-primary: #F59E0B;
-  --logo-filter: brightness(0) invert(1); /* Forces logo to pure white */
+  --gold-primary: #F59E0B; /* Primary Gold */
+  --logo-filter: brightness(0) invert(1);
 }
 
 .light {
-  /* --- LIGHT THEME (HIGH VISIBILITY) --- */
+  /* --- LIGHT THEME (AA COMPLIANT CONTRAST) --- */
   --background: #FFFFFF;
   --foreground: #020617;
   --card-bg: #F8FAFC; 
   --card-hover: #F1F5F9;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.15);
   --text-primary: #020617; 
   --text-secondary: #334155; 
-  --gold-primary: #D97706;
-  --logo-filter: brightness(0); /* Forces logo to pure black */
+  --gold-primary: #B45309; /* Darker Gold for Light Theme (meets 4.5:1 on white) */
+  --logo-filter: brightness(0);
 }
 
 html {
@@ -44,17 +44,17 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* --- BACKGROUND NOISE --- */
-.bg-noise {
+/* --- ACCESSIBILITY HELPER --- */
+.sr-only {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* --- GLASSMORPHISM --- */
@@ -63,7 +63,7 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
