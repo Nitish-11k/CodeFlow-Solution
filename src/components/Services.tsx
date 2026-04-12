@@ -27,11 +27,11 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-zinc-950">
+    <section id="services" className="py-24 bg-[var(--background)]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Available Solutions</h2>
-          <p className="text-gray-400">Powering your architecture with enterprise-grade tools.</p>
+          <p className="text-[var(--text-secondary)]">Powering your architecture with enterprise-grade tools.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -45,7 +45,7 @@ export default function Services() {
                 {item.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>

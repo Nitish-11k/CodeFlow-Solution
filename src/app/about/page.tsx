@@ -20,7 +20,7 @@ export default function AboutPage() {
       titleFront: "Slow Development",
       textFront: "Building a robust backend from scratch takes months of testing.",
       
-      iconBack: <Zap className="w-8 h-8 text-[#020617]" />, 
+      iconBack: <Zap className="w-8 h-8 text-[var(--background)]" />, 
       titleBack: "Rapid Launch",
       textBack: "Launch in days, not months, with our pre-configured kits."
     },
@@ -30,7 +30,7 @@ export default function AboutPage() {
       titleFront: "Complex Integration",
       textFront: "Struggling to connect Stripe, Auth, and Databases securely.",
       
-      iconBack: <CheckCircle className="w-8 h-8 text-[#020617]" />,
+      iconBack: <CheckCircle className="w-8 h-8 text-[var(--background)]" />,
       titleBack: "Seamless Setup",
       textBack: "Plug-and-play modules that just work out of the box."
     },
@@ -40,14 +40,14 @@ export default function AboutPage() {
       titleFront: "High Costs",
       textFront: "Hiring senior architects to design scalable systems is expensive.",
       
-      iconBack: <TrendingUp className="w-8 h-8 text-[#020617]" />,
+      iconBack: <TrendingUp className="w-8 h-8 text-[var(--background)]" />,
       titleBack: "Smart Investment",
       textBack: "Enterprise-grade architecture for a fraction of the cost."
     }
   ];
 
   return (
-    <main className="min-h-screen bg-[#020617]">
+    <main className="min-h-screen bg-[var(--background)]">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
@@ -67,13 +67,13 @@ export default function AboutPage() {
               priority
               unoptimized
             />
-            <div className="absolute inset-0 bg-[#020617]/20 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-[var(--background)]/20 mix-blend-multiply" />
           </div>
 
           {/* RIGHT: Intro Text */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-4xl md:text-5xl font-black text-white mt-2 mb-6">
+              <h1 className="text-4xl md:text-5xl font-black text-[var(--text-primary)] mt-2 mb-6">
                 About CodeFlow
               </h1>
             </div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <span className="text-[#D4AF37]">you drive the car.</span>
             </h2>
 
-            <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
+            <div className="space-y-4 text-[var(--text-secondary)] text-lg leading-relaxed">
               <p>
                 <strong>CodeFlow Solution</strong> exists for one reason: to empower startup founders who have the vision but need the technical foundation to bring it to life.
               </p>
@@ -103,10 +103,10 @@ export default function AboutPage() {
            ========================================= */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-white">
+            <h3 className="text-3xl font-bold text-[var(--text-primary)]">
               What We Are Solving
             </h3>
-            <p className="text-gray-400 mt-2">
+            <p className="text-[var(--text-secondary)] mt-2">
               The biggest hurdles founders face, removed.
             </p>
           </div>
@@ -134,15 +134,15 @@ export default function AboutPage() {
                   {/* --- FRONT (Problem) --- */}
                   {/* ✅ FIX: backfaceVisibility: 'hidden' ensures this disappears when flipped */}
                   <div 
-                    className="absolute inset-0 h-full w-full bg-[#0F172A] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
+                    className="absolute inset-0 h-full w-full bg-[var(--card-bg)] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
                     style={{ backfaceVisibility: 'hidden' }}
                   >
                     <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-full shrink-0">
                       {item.iconFront}
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-xl mb-2">{item.titleFront}</h4>
-                      <p className="text-sm text-gray-400 leading-relaxed">{item.textFront}</p>
+                      <h4 className="font-bold text-[var(--text-primary)] text-xl mb-2">{item.titleFront}</h4>
+                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.textFront}</p>
                     </div>
                     <div className="mt-auto text-xs font-bold text-red-400 uppercase tracking-widest bg-red-500/10 px-3 py-1 rounded-full">
                         Problem
@@ -158,14 +158,14 @@ export default function AboutPage() {
                         transform: 'rotateY(180deg)' 
                     }}
                   >
-                    <div className="p-4 bg-[#020617]/10 rounded-full shrink-0">
+                    <div className="p-4 bg-[var(--background)]/10 rounded-full shrink-0">
                       {item.iconBack}
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#020617] text-xl mb-2">{item.titleBack}</h4>
-                      <p className="text-sm text-[#020617]/80 leading-relaxed font-medium">{item.textBack}</p>
+                      <h4 className="font-bold text-[var(--background)] text-xl mb-2">{item.titleBack}</h4>
+                      <p className="text-sm text-[var(--background)]/80 leading-relaxed font-medium">{item.textBack}</p>
                     </div>
-                    <div className="mt-auto text-xs font-bold text-[#020617] uppercase tracking-widest bg-[#020617]/10 px-3 py-1 rounded-full">
+                    <div className="mt-auto text-xs font-bold text-[var(--background)] uppercase tracking-widest bg-[var(--background)]/10 px-3 py-1 rounded-full">
                         Solved
                     </div>
                   </div>
@@ -186,10 +186,10 @@ export default function AboutPage() {
            ========================================= */}
         <div className="pt-16 border-t border-white/10">
           <div className="flex flex-col items-center text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
               Join our Community
             </h3>
-            <p className="text-gray-400 mb-8 max-w-lg text-lg">
+            <p className="text-[var(--text-secondary)] mb-8 max-w-lg text-lg">
               Connect with other founders, get exclusive discounts on kits, and stay updated with our latest dev tools.
             </p>
             
@@ -197,7 +197,7 @@ export default function AboutPage() {
               href="https://www.linkedin.com/company/codeflow-solution/" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#0077B5] text-white rounded-full font-bold hover:bg-[#005E93] transition-all shadow-lg hover:shadow-[#0077B5]/40 hover:-translate-y-1 group"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#0077B5] text-[var(--text-primary)] rounded-full font-bold hover:bg-[#005E93] transition-all shadow-lg hover:shadow-[#0077B5]/40 hover:-translate-y-1 group"
             >
               <Linkedin size={24} />
               <span>Follow us on LinkedIn</span>

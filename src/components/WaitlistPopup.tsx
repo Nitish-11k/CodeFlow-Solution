@@ -67,7 +67,7 @@ export default function WaitlistPopup() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="absolute inset-0 bg-[#0F172A]/40 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 bg-[var(--card-bg)]/40 backdrop-blur-sm cursor-pointer"
           />
 
           <motion.div
@@ -82,7 +82,7 @@ export default function WaitlistPopup() {
 
             <button 
               onClick={handleClose}
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-[#1B365D] hover:bg-gray-100 rounded-full transition-all z-50 cursor-pointer"
+              className="absolute top-4 right-4 p-2 text-[var(--text-secondary)] hover:text-[#1B365D] hover:bg-gray-100 rounded-full transition-all z-50 cursor-pointer"
             >
               <X size={20} />
             </button>
@@ -120,7 +120,7 @@ export default function WaitlistPopup() {
                       Don't Build From Scratch.
                     </h2>
                     <p className="text-[#64748B] text-base leading-relaxed">
-                      Get the <strong>Founder Kits</strong> that save you months of dev time. Join the waitlist to get the <span className="text-[#D4AF37] font-bold">best price deal</span> on launch day.
+                      Get the <strong>Founder Kits</strong> that save you months of dev time. Join the waitlist to get <span className="text-[#D4AF37] font-bold">priority access</span> on launch day.
                     </p>
                     <p className="text-xs font-bold text-[#1B365D] mt-2 bg-blue-50 inline-block px-3 py-1 rounded-lg">
                       Limited offer for the first 20 founders.
@@ -129,20 +129,20 @@ export default function WaitlistPopup() {
 
                   <form onSubmit={handleSubmit} className="space-y-3">
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#1B365D] transition-colors" size={20} />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] group-focus-within:text-[#1B365D] transition-colors" size={20} />
                       <input
                         type="email"
                         required
                         placeholder="founder@startup.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white border border-gray-200 text-[#1E293B] placeholder:text-gray-400 focus:outline-none focus:border-[#1B365D] focus:ring-4 focus:ring-[#1B365D]/5 transition-all shadow-sm"
+                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white border border-gray-200 text-[#1E293B] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[#1B365D] focus:ring-4 focus:ring-[#1B365D]/5 transition-all shadow-sm"
                       />
                     </div>
                     <button 
                       type="submit"
                       disabled={loading}
-                      className="w-full py-4 bg-[#1B365D] hover:bg-[#2C4A7C] text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full py-4 bg-[#1B365D] hover:bg-[#2C4A7C] text-[var(--text-primary)] font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {loading ? (
                         <>
@@ -159,18 +159,18 @@ export default function WaitlistPopup() {
                   </form>
 
                   <div className="mt-1 pt-4 border-t border-gray-100 text-center flex flex-col gap-3">
-                     <p className="text-xs text-gray-400">Stay updated with our journey</p>
+                     <p className="text-xs text-[var(--text-secondary)]">Stay updated with our journey</p>
                      <a 
                        href="https://www.linkedin.com/company/codeflow-solution/" 
                        target="_blank"
                        rel="noopener noreferrer"
-                       className="w-full py-3 border border-[#0077B5] text-[#0077B5] hover:bg-[#0077B5] hover:text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-sm"
+                       className="w-full py-3 border border-[#0077B5] text-[#0077B5] hover:bg-[#0077B5] hover:text-[var(--text-primary)] font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-sm"
                      >
                        <Linkedin size={18} /> Follow CodeFlow
                      </a>
                      <button 
                         onClick={handleClose}
-                        className="text-xs text-gray-400 hover:text-[#1B365D] transition-colors mt-2"
+                        className="text-xs text-[var(--text-secondary)] hover:text-[#1B365D] transition-colors mt-2"
                      >
                         No thanks, I'll browse the site
                      </button>

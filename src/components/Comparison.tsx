@@ -18,8 +18,8 @@ export default function Comparison() {
             <thead>
               <tr className="border-b border-gray-200">
                 <th className="p-4 text-left text-gray-500 font-medium">Features</th>
-                <th className="p-4 text-center text-gray-400 font-medium">Building from Scratch</th>
-                <th className="p-4 text-center text-gray-400 font-medium">Other Node.js Kits</th>
+                <th className="p-4 text-center text-[var(--text-secondary)] font-medium">Building from Scratch</th>
+                <th className="p-4 text-center text-[var(--text-secondary)] font-medium">Other Node.js Kits</th>
                 <th className="p-4 text-center bg-[#F1F5F9] rounded-t-xl text-[#1B365D] font-bold border-t border-x border-[#E2E8F0]">
                   FounderKit (.NET)
                 </th>

@@ -1,21 +1,39 @@
 "use client";
-import { Target } from "lucide-react";
+import { CheckCircle2, Shield, Zap } from "lucide-react";
 
 export default function Mission() {
   return (
-    // ✅ Updated BG
-    <section id="mission" className="py-20 bg-[#020617] text-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <div className="inline-flex items-center justify-center p-3 bg-[#D4AF37] rounded-full mb-6">
-          <Target className="w-6 h-6 text-[#020617]" />
+    <section id="mission" className="py-24 bg-[var(--background)] relative border-y border-[var(--border-color)] transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
+        <div className="space-y-4">
+          <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center text-[#D4AF37] mx-auto md:mx-0">
+            <Zap size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-[var(--text-primary)]">Unmatched Speed</h3>
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+            Pre-configured .NET 8 templates with production-grade dependencies to shave off weeks of development.
+          </p>
         </div>
-        
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#D4AF37]">Our Aim</h2>
-        
-        <p className="text-xl md:text-2xl leading-relaxed font-light text-gray-300">
-          "We aim to provide the better solution to every new startup founder who struggles to create their first MVP. 
-          We are here to create your MVP in weeks which will save your time."
-        </p>
+
+        <div className="space-y-4">
+          <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500 mx-auto md:mx-0">
+            <Shield size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-[var(--text-primary)]">Secure by Design</h3>
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+            Enterprise Identity, JWT, and RBAC baked into every kit to ensure your data stays protected from Day 1.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500 mx-auto md:mx-0">
+            <CheckCircle2 size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-[var(--text-primary)]">Proven Architecture</h3>
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+            Battle-tested Clean Architecture principles used by top-tier engineering teams worldwide.
+          </p>
+        </div>
       </div>
     </section>
   );

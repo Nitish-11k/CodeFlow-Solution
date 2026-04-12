@@ -1,112 +1,126 @@
 "use client";
 import { useState } from "react";
-import { Terminal, Copy, Server } from "lucide-react";
+import { Terminal, Cpu, Database, Sparkles, Code2, Globe, ShieldCheck } from "lucide-react";
 
 export default function TechStack() {
-  const [activeCard, setActiveCard] = useState<'stack' | 'vps'>('stack');
+  const [activeStack, setActiveStack] = useState<'dotnet' | 'java'>('dotnet');
 
   return (
-    // ✅ Updated BG
-    <section id="stack" className="py-24 bg-[#020617] relative overflow-hidden">
-      
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+    <section id="stack" className="py-24 bg-[var(--background)] relative overflow-hidden transition-colors duration-500">
+      {/* Background Orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none opacity-50" />
 
-      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 relative z-10">
-        
-        {/* LEFT: Text Section */}
-        <div className="w-full lg:flex-1 text-center lg:text-left mb-2 lg:mb-0">
-          <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-white mb-6 drop-shadow-[0_4px_0_rgba(0,0,0,0.5)] leading-[1.1]">
-            OUR <br />
-            TECH <br />
-            STACK
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight">
+            Backend <span className="text-[var(--gold-primary)]">Architecture</span> Stacks
           </h2>
-          <p className="text-gray-400 text-lg max-w-md mx-auto lg:mx-0">
-            Enterprise-grade technologies configured for maximum scalability and zero downtime.
-          </p>
-          <p className="mt-6 text-[#D4AF37] text-sm font-mono animate-pulse">
-            // Click the back card to shuffle
+          <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto leading-relaxed">
+            We specialize in building the core engines. You choose your own frontend.
           </p>
         </div>
 
-        {/* RIGHT: Cards (Same logic, ensured dark backgrounds) */}
-        <div className="w-full lg:flex-1 max-w-2xl relative h-[320px] lg:h-[450px] flex items-center justify-center perspective-1000">
-          
-          {/* Card 1: VPS */}
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+          {/* .NET STACK (ACTIVE) */}
           <div 
-            onClick={() => setActiveCard('vps')}
-            className={`absolute w-full max-w-[500px] transition-all duration-700 cubic-bezier(0.25, 0.8, 0.25, 1) transform origin-bottom
-              ${activeCard === 'vps' 
-                ? "z-20 scale-100 translate-x-0 translate-y-0 rotate-0 opacity-100" 
-                : "z-10 scale-95 translate-x-4 lg:translate-x-8 -translate-y-4 lg:-translate-y-6 rotate-3 lg:rotate-6 opacity-60 cursor-pointer hover:opacity-100 hover:scale-95"
+            onClick={() => setActiveStack('dotnet')}
+            className={`group relative p-8 rounded-[2.5rem] border transition-all duration-500 cursor-pointer overflow-hidden
+              ${activeStack === 'dotnet' 
+                ? "bg-[var(--card-bg)] border-[var(--gold-primary)]/30 shadow-2xl backdrop-blur-xl" 
+                : "bg-[var(--background)]/[0.02] border-[var(--border-color)] opacity-60 grayscale hover:grayscale-0 hover:opacity-100 backdrop-blur-sm"
               }`}
           >
-            <div className="rounded-xl overflow-hidden bg-[#0F172A] border border-[#334155] shadow-2xl shadow-black/50">
-              <div className="bg-[#1E293B] px-4 py-3 flex items-center justify-between border-b border-[#334155]">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                  <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+            <div className="absolute top-0 right-0 p-4">
+              <span className="text-[10px] font-bold tracking-[0.2em] bg-green-500/10 text-green-600 px-3 py-1 rounded-full border border-green-500/20 uppercase">
+                Stable & Ready
+              </span>
+            </div>
+            <div className="space-y-8">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center text-[#D4AF37] border border-[#D4AF37]/20">
+                  <Code2 size={24} />
                 </div>
-                <div className="text-gray-400 text-xs font-mono flex items-center gap-2">
-                  <Server size={12} /> vps_config.yml
+                <div>
+                  <h3 className="text-2xl font-bold text-[var(--text-primary)]">.NET 8 Backend</h3>
+                  <p className="text-sm text-[var(--text-secondary)]">Optimized for high-concurrency microservices.</p>
                 </div>
-                <div className="w-4"></div>
               </div>
-              <div className="p-6 overflow-x-auto h-64 flex flex-col justify-center">
-                <pre className="font-mono text-sm leading-relaxed text-gray-400">
-                  <code className="language-yaml">
-                    <span className="text-[#F07178]">server</span>:<br/>
-                    {`  `}provider: <span className="text-[#C3E88D]">"CodeFlow Cloud"</span><br/>
-                    {`  `}region: <span className="text-[#C3E88D]">"Global Edge"</span><br/>
-                    <span className="text-[#F07178]">specs</span>:<br/>
-                    {`  `}cpu: <span className="text-[#FFCB6B]">8 vCPU High-Freq</span><br/>
-                    {`  `}ram: <span className="text-[#FFCB6B]">32GB DDR5</span><br/>
-                    {`  `}storage: <span className="text-[#FFCB6B]">NVMe RAID 10</span>
-                  </code>
-                </pre>
+              <div className="space-y-4 font-mono text-sm px-4 md:px-0">
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all group-hover:bg-white/10 shadow-sm">
+                  <Cpu size={18} className="text-purple-500" />
+                  <span className="text-[var(--text-secondary)]">Framework:</span>
+                  <span className="text-[var(--text-primary)] font-bold">ASP.NET Core Web API 8.0</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all group-hover:bg-white/10 shadow-sm">
+                  <Database size={18} className="text-green-500" />
+                  <span className="text-[var(--text-secondary)]">Persistence:</span>
+                  <span className="text-[var(--text-primary)] font-bold">SQL Server + Entity Framework</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all group-hover:bg-white/10 shadow-sm">
+                  <ShieldCheck size={18} className="text-[#D4AF37]" />
+                  <span className="text-[var(--text-secondary)]">Security:</span>
+                  <span className="text-[var(--text-primary)] font-bold">JWT + Identity + RBAC</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Card 2: Stack */}
+          {/* JAVA STACK (COMING SOON) */}
           <div 
-            onClick={() => setActiveCard('stack')}
-            className={`absolute w-full max-w-[500px] transition-all duration-700 cubic-bezier(0.25, 0.8, 0.25, 1) transform origin-bottom
-              ${activeCard === 'stack' 
-                ? "z-20 scale-100 translate-x-0 translate-y-0 rotate-0 opacity-100" 
-                : "z-10 scale-95 -translate-x-4 lg:-translate-x-8 -translate-y-4 lg:-translate-y-6 -rotate-3 lg:-rotate-6 opacity-60 cursor-pointer hover:opacity-100 hover:scale-95"
+            onClick={() => setActiveStack('java')}
+            className={`group relative p-8 rounded-[2.5rem] border transition-all duration-500 cursor-pointer overflow-hidden
+              ${activeStack === 'java' 
+                ? "bg-[var(--card-bg)] border-blue-500/30 shadow-2xl backdrop-blur-xl" 
+                : "bg-[var(--background)]/[0.02] border-[var(--border-color)] opacity-60 grayscale hover:grayscale-0 hover:opacity-100 backdrop-blur-sm"
               }`}
           >
-            <div className="rounded-xl overflow-hidden bg-[#0F172A] border border-[#334155] shadow-2xl shadow-black/50">
-              <div className="bg-[#1E293B] px-4 py-3 flex items-center justify-between border-b border-[#334155]">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                  <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+            <div className="absolute top-0 right-0 p-4">
+              <span className="text-[10px] font-bold tracking-[0.2em] bg-blue-500/10 text-blue-600 px-3 py-1 rounded-full border border-blue-500/20 flex items-center gap-2">
+                <Sparkles size={10} /> COMING SOON
+              </span>
+            </div>
+            <div className="space-y-8 px-4 md:px-0">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 border border-blue-500/20">
+                  <Globe size={24} />
                 </div>
-                <div className="text-gray-400 text-xs font-mono flex items-center gap-2">
-                  <Terminal size={12} /> config.ts
+                <div>
+                  <h3 className="text-2xl font-bold text-[var(--text-primary)]">Java Spring Backend</h3>
+                  <p className="text-sm text-[var(--text-secondary)]">Enterprise standard for financial systems.</p>
                 </div>
-                <Copy size={14} className="text-gray-400" />
               </div>
-              <div className="p-6 overflow-x-auto h-64 flex flex-col justify-center">
-                <pre className="font-mono text-sm leading-relaxed">
-                  <code className="language-javascript">
-                    <span className="text-[#C77D63]">const</span> <span className="text-[#82AAFF]">Stack</span> <span className="text-[#89DDFF]">=</span> <span className="text-[#FFCB6B]">{`{`}</span>
-                    {`\n  `}
-                    <span className="text-[#F07178]">frontend</span><span className="text-[#89DDFF]">:</span> <span className="text-[#C3E88D]">"Next.js 14"</span>,<br/>
-                    {`  `}
-                    <span className="text-[#F07178]">backend</span><span className="text-[#89DDFF]">:</span> <span className="text-[#C3E88D]">"Spring Boot"</span>,<br/>
-                    {`  `}
-                    <span className="text-[#F07178]">database</span><span className="text-[#89DDFF]">:</span> <span className="text-[#C3E88D]">"Postgres"</span>
-                    {`\n`}
-                    <span className="text-[#FFCB6B]">{`}`}</span>;
-                  </code>
-                </pre>
+              <div className="space-y-4 font-mono text-sm opacity-50">
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all shadow-sm">
+                  <Cpu size={18} className="text-red-500" />
+                  <span className="text-[var(--text-secondary)]">Framework:</span>
+                  <span className="text-[var(--text-primary)] font-bold">Spring Boot 3.3</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all shadow-sm">
+                  <Database size={18} className="text-orange-500" />
+                  <span className="text-[var(--text-secondary)]">Persistence:</span>
+                  <span className="text-[var(--text-primary)] font-bold">PostgreSQL + Hibernate</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-white/5 border border-[var(--border-color)] rounded-2xl transition-all shadow-sm">
+                  <ShieldCheck size={18} className="text-blue-500" />
+                  <span className="text-[var(--text-secondary)]">Security:</span>
+                  <span className="text-[var(--text-primary)] font-bold">OAuth2 + OpenID Connect</span>
+                </div>
+              </div>
+            </div>
+            <div className="absolute inset-0 bg-[var(--background)]/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="px-6 py-2 bg-blue-600 text-[var(--text-primary)] font-bold rounded-full text-xs animate-bounce shadow-lg">
+                Development in Progress 🛠️
               </div>
             </div>
           </div>
+        </div>
 
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center gap-3 p-2 px-6 rounded-full bg-white/5 border border-[var(--border-color)] text-xs font-mono text-[var(--text-secondary)] shadow-sm">
+            <Terminal size={14} className="text-[var(--gold-primary)]" />
+            <span>System.out.println("Building the future of finance...");</span>
+          </div>
         </div>
       </div>
     </section>

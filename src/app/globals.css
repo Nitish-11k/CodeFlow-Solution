@@ -6,11 +6,29 @@
 }
 
 :root {
-  /* --- ULTRA PREMIUM PALETTE --- */
-  --background: #020617; /* Deepest Midnight Blue */
-  --foreground: #F8FAFC; /* Soft White */
-  --gold-primary: #F59E0B; /* Rich Amber/Gold */
-  --gold-secondary: #D97706;
+  /* --- DARK THEME (DEFAULT) --- */
+  --background: #020617;
+  --foreground: #F8FAFC;
+  --card-bg: #0B1120;
+  --card-hover: #0F172A;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --gold-primary: #F59E0B;
+  --logo-filter: brightness(0) invert(1); /* Forces logo to pure white */
+}
+
+.light {
+  /* --- LIGHT THEME (HIGH VISIBILITY) --- */
+  --background: #FFFFFF;
+  --foreground: #020617;
+  --card-bg: #F8FAFC; 
+  --card-hover: #F1F5F9;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --text-primary: #020617; 
+  --text-secondary: #334155; 
+  --gold-primary: #D97706;
+  --logo-filter: brightness(0); /* Forces logo to pure black */
 }
 
 html {
@@ -19,13 +37,14 @@ html {
 
 body {
   background-color: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   font-family: var(--font-sans), sans-serif;
   antialiased: true;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* --- BACKGROUND NOISE (Adds Texture) --- */
+/* --- BACKGROUND NOISE --- */
 .bg-noise {
   position: absolute;
   top: 0;
@@ -38,32 +57,18 @@ body {
   z-index: 0;
 }
 
-/* --- PREMIUM TEXT GRADIENTS --- */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0px 0px 30px rgba(245, 158, 11, 0.3);
-}
-
-.text-gradient-silver {
-  background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* --- GLASSMORPHISM --- */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 /* --- SCROLLBAR --- */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-track { background: var(--background); }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
-
+::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
