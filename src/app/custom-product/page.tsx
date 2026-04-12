@@ -22,7 +22,8 @@ export default function CustomProductPage() {
     auth: "",
     userFields: "",
     businessTables: "",
-    details: ""
+    details: "",
+    timeline: "< 1 Month"
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
